@@ -299,7 +299,7 @@
 
 	<profiles>
 		<profile>
-			<id>active-on-property-environment</id>
+			<id>active-on-property-environment-release</id>
 			<activation>
 				<property>
 					<name>release</name>
@@ -356,6 +356,46 @@
 			<properties>
 				<jacocoArgLine></jacocoArgLine>
 			</properties>
+		</profile>
+
+		<profile>
+			<id>active-on-property-environment-dependency-check</id>
+			<activation>
+				<property>
+					<name>dependency-check</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!-- OWASP dependency check -->
+					<!--
+						Activate it with: -Ddependency-check=true
+					-->
+					<plugin>
+						<groupId>org.owasp</groupId>
+						<artifactId>dependency-check-maven</artifactId>
+						<version>12.1.1</version>
+						<configuration>
+							<nvdApiKey>${env.MAVEN_NVD_API_KEY}</nvdApiKey>
+							<nvdApiDelay>16000</nvdApiDelay>
+							<suppressionFiles>
+								<suppressionFile>owasp-suppressions.xml</suppressionFile>
+							</suppressionFiles>
+							<hostedSuppressionsForceUpdate>true</hostedSuppressionsForceUpdate>
+							<ossIndexWarnOnlyOnRemoteErrors>true</ossIndexWarnOnlyOnRemoteErrors>
+							<failBuildOnCVSS>7</failBuildOnCVSS>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 
