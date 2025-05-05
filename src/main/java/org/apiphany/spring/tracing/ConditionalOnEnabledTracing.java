@@ -1,4 +1,4 @@
-package org.apiphany.spring.tracing.otel;
+package org.apiphany.spring.tracing;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
