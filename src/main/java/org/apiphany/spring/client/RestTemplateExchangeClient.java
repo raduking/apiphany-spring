@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.URI;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ import org.apiphany.http.CloseableHttpResponseInputStream;
 import org.apiphany.http.HttpException;
 import org.apiphany.http.HttpMethod;
 import org.apiphany.http.HttpStatus;
-import org.apiphany.lang.collections.Lists;
+import org.apiphany.lang.collections.Maps;
 import org.apiphany.spring.BeanFinder;
 import org.apiphany.spring.ConnectionManagerMetricsBinder;
 import org.apiphany.spring.RestTemplates;
@@ -210,14 +209,8 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	protected <T> HttpEntity<T> buildHttpEntity(final ApiRequest<T> request) {
 		HttpHeaders headers = new HttpHeaders();
 		Map<String, List<String>> existingHeaders = request.getHeaders();
-		if (null != existingHeaders) {
+		if (Maps.isNotEmpty(existingHeaders)) {
 			existingHeaders.forEach(headers::addAll);
-		}
-		if (null == headers.getContentType()) {
-			headers.setContentType(MediaType.APPLICATION_JSON);
-		}
-		if (Lists.isEmpty(headers.getAccept())) {
-			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		}
 		return new HttpEntity<>(request.getBody(), headers);
 	}

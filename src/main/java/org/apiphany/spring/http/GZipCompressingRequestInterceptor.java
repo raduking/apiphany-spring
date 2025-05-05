@@ -11,6 +11,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.util.ObjectUtils;
 
 /**
  * GZIP compression interceptor.
@@ -41,17 +42,34 @@ public class GZipCompressingRequestInterceptor implements ClientHttpRequestInter
 		HttpHeaders httpHeaders = httpRequest.getHeaders();
 		byte[] bytes = body;
 
-		if (!httpHeaders.containsKey(SKIP_COMPRESSION)) {
-			LOGGER.debug("Compressing request: URI: {}", httpRequest.getURI());
-			httpHeaders.add(HttpHeaders.CONTENT_ENCODING, ContentEncoding.GZIP.value());
-			httpHeaders.add(HttpHeaders.ACCEPT_ENCODING, ContentEncoding.GZIP.value());
-			bytes = GZip.compress(body);
-			httpHeaders.set(HttpHeaders.CONTENT_LENGTH, Integer.toString(bytes.length));
-			LOGGER.debug("Request compressed, sending...");
+		if (!ObjectUtils.isEmpty(bytes)) {
+			if (!httpHeaders.containsKey(SKIP_COMPRESSION)) {
+				LOGGER.debug("Compressing request: URI: {}", httpRequest.getURI());
+				bytes = compress(bytes, httpHeaders);
+				LOGGER.debug("Request compressed, sending...");
+			} else {
+				LOGGER.debug("Compression skipped via {} custom HTTP header", SKIP_COMPRESSION);
+			}
 		} else {
-			LOGGER.debug("Compression skipped via {} custom HTTP header", SKIP_COMPRESSION);
+			LOGGER.debug("Compression skipped because the body was empty");
 		}
 		return exec.execute(httpRequest, bytes);
+	}
+
+	/**
+	 * Compresses the given bytes and adds the corresponding compression headers to the request.
+	 *
+	 * @param body bytes to compress
+	 * @param httpHeaders the HTTP headers of the request
+	 * @return compressed byte array
+	 * @throws IOException when compression fails
+	 */
+	private static byte[] compress(final byte[] body, final HttpHeaders httpHeaders) throws IOException {
+		byte[] bytes = GZip.compress(body);
+		httpHeaders.add(HttpHeaders.CONTENT_ENCODING, ContentEncoding.GZIP.value());
+		httpHeaders.add(HttpHeaders.ACCEPT_ENCODING, ContentEncoding.GZIP.value());
+		httpHeaders.set(HttpHeaders.CONTENT_LENGTH, Integer.toString(bytes.length));
+		return bytes;
 	}
 
 }
