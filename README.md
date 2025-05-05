@@ -1,4 +1,6 @@
-# API-Phany
+# Apiphany HttpClient 5
+
+A plugin library for Apiphany adding Spring RestTemplate support.
 
 ### Dependencies
 
