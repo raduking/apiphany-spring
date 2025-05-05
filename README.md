@@ -14,6 +14,15 @@ A plugin library for Apiphany adding Spring RestTemplate support.
 
 ### Getting Started
 
+
+Project being in development, you need to build it yourself.
+
+```
+git clone git@github.com:raduking/apiphany-spring.git
+cd apiphany-spring
+mvn clean install
+```
+
 Maven: add this dependency to your `pom.xml`
 
 ```xml
