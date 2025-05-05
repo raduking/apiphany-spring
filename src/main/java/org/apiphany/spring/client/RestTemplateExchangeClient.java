@@ -155,6 +155,7 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	 * Performs a download HTTP operation. The response entity body will be an {@link InputStream}.
 	 *
 	 * @param <T> response entity type
+	 * @param <U> request entity type
 	 * @param uri URI to call
 	 * @param method HTTP method
 	 * @param requestEntity request HTTP entity

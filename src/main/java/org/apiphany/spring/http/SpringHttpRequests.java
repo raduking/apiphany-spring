@@ -39,7 +39,7 @@ public class SpringHttpRequests {
 	 * Encodes the given request parameters.
 	 *
 	 * @param requestParameters HTTP request parameters
-	 * @return
+	 * @return encoded request parameters
 	 */
 	public static Map<String, String> encodeRequestParameters(final Map<String, String> requestParameters) {
 		Map<String, String> params = HashMap.newHashMap(requestParameters.size());

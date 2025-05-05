@@ -41,6 +41,9 @@ public abstract class ExtendedMaps {
 	/**
 	 * Returns a new {@link MultiValueMap} from a {@link Map}.
 	 *
+	 * @param <K> key type
+	 * @param <V> value type
+	 *
 	 * @param map entry map
 	 * @return a new multi value map
 	 */
@@ -58,6 +61,9 @@ public abstract class ExtendedMaps {
 	/**
 	 * Returns a new {@link MultiValueMap} from a key and value.
 	 *
+	 * @param <K> key type
+	 * @param <V> value type
+	 *
 	 * @param key map entry key
 	 * @param value map entry value
 	 * @return a new multi value map
@@ -73,6 +79,7 @@ public abstract class ExtendedMaps {
 	 *
 	 * @param <K> key type
 	 * @param <V> value type
+	 *
 	 * @return an empty multi values map
 	 */
 	public static <K, V> MultiValuedMap<K, V> emptyMultiValuedMap() {

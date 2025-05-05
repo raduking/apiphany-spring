@@ -6,6 +6,11 @@ import org.springframework.context.annotation.Configuration;
 
 import io.opentelemetry.extension.trace.propagation.B3Propagator;
 
+/**
+ * Configure OTEL multi-header tracing.
+ *
+ * @author Radu Sebastian LAZIN
+ */
 @Configuration
 @ConditionalOnEnabledTracing
 @ConditionalOnClass(B3Propagator.class)

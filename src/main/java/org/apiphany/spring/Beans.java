@@ -33,6 +33,7 @@ public class Beans {
 	 *
 	 * @param <T> bean type
 	 * @param beanName bean name
+	 * @param ctx application context
 	 * @param onError exception consumer
 	 * @return a bean
 	 */
@@ -50,6 +51,7 @@ public class Beans {
 	 *
 	 * @param <T> bean type
 	 * @param beanName bean name
+	 * @param ctx application context
 	 * @return a bean
 	 */
 	public static <T> T getBean(final String beanName, final ApplicationContext ctx) {
@@ -61,6 +63,8 @@ public class Beans {
 	 *
 	 * @param <T> bean type
 	 * @param beanName bean name
+	 * @param neededInClass needed in the given class
+	 * @param ctx application context
 	 * @return a bean
 	 */
 	public static <T> T getBean(final String beanName, final Class<?> neededInClass, final ApplicationContext ctx) {
@@ -72,12 +76,13 @@ public class Beans {
 	 *
 	 * @param <T> bean type
 	 * @param beanClass bean class
+	 * @param ctx application context
 	 * @param onError exception consumer
 	 * @return a bean
 	 */
-	public static <T> T getBean(final Class<?> beanClass, final ApplicationContext applicationContext, final Consumer<Exception> onError) {
+	public static <T> T getBean(final Class<?> beanClass, final ApplicationContext ctx, final Consumer<Exception> onError) {
 		try {
-			return JavaObjects.cast(applicationContext.getBean(beanClass));
+			return JavaObjects.cast(ctx.getBean(beanClass));
 		} catch (Exception e) {
 			LOGGER.trace(MESSAGE_BEAN_NOT_FOUND, beanClass);
 			onError.accept(e);
@@ -90,6 +95,7 @@ public class Beans {
 	 *
 	 * @param <T> bean type
 	 * @param beanClass bean class
+	 * @param ctx application context
 	 * @return a bean
 	 */
 	public static <T> T getBean(final Class<?> beanClass, final ApplicationContext ctx) {
@@ -101,6 +107,8 @@ public class Beans {
 	 *
 	 * @param <T> bean type
 	 * @param beanClass bean class
+	 * @param neededInClass needed in the given class
+	 * @param ctx application context
 	 * @return a bean
 	 */
 	public static <T> T getBean(final Class<?> beanClass, final Class<?> neededInClass, final ApplicationContext ctx) {
