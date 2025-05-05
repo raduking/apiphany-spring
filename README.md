@@ -1,4 +1,4 @@
-# Apiphany HttpClient 5
+# Apiphany Spring
 
 A plugin library for Apiphany adding Spring RestTemplate support.
 
