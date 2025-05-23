@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.hc.client5.http.classic.HttpClient;
+import org.morphix.lang.Nullables;
+import org.springframework.boot.actuate.metrics.web.client.ObservationRestTemplateCustomizer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -52,9 +54,9 @@ public abstract class RestTemplates {
 //			Nullables.whenNotNull(Beans.<ClientHttpRequestInterceptor>getBean(beanName, ctx, Beans.nullOnError()))
 //					.then(restTemplate.getInterceptors()::add);
 //		}
-//		ObservationRestTemplateCustomizer observationCustomizer =
-//				Beans.getBean(ObservationRestTemplateCustomizer.class, ctx, Beans.nullOnError());
-//		Nullables.whenNotNull(observationCustomizer).then(customizer -> customizer.customize(restTemplate));
+		ObservationRestTemplateCustomizer observationCustomizer =
+				Beans.getBean(ObservationRestTemplateCustomizer.class, ctx, Beans.nullOnError());
+		Nullables.whenNotNull(observationCustomizer).then(customizer -> customizer.customize(restTemplate));
 		return restTemplate;
 	}
 
