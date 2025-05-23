@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.6</version>
+		<version>3.5.0</version>
 		<relativePath />
 	</parent>
 
@@ -50,12 +50,17 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<pitest.plugin.version>1.19.1</pitest.plugin.version>
-		<pitest.plugin.junit5.version>1.2.2</pitest.plugin.junit5.version>
+		
+		<!-- Testing dependencies versions -->
+		<pitest.plugin.version>1.19.4</pitest.plugin.version>
+		<pitest.plugin.junit5.version>1.2.3</pitest.plugin.junit5.version>
 		<jacoco.plugin.version>0.8.13</jacoco.plugin.version>
 		<gpg.plugin.version>3.2.7</gpg.plugin.version>
+		
+		<!-- Publishing dependencies versions -->
 		<project.info.reports.plugin.version>3.9.0</project.info.reports.plugin.version>
 		<central.publishing.plugin.version>0.7.0</central.publishing.plugin.version>
+		
 		<apiphanySpringArgLine>
 			-Djson-builder.to-json.indent-output=true
 			-XX:+EnableDynamicAgentLoading
