@@ -123,6 +123,16 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	}
 
 	/**
+	 * @see #close()
+	 */
+	@Override
+	public void close() throws Exception {
+		if (null != httpClient) {
+			httpClient.close();
+		}
+	}
+
+	/**
 	 * @see ExchangeClient#exchange(ApiRequest)
 	 */
 	@Override

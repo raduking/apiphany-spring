@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>io.github.raduking</groupId>
 			<artifactId>apiphany-httpclient5</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 		<!-- Jakarta namespace -->
