@@ -17,6 +17,18 @@ import io.opentelemetry.extension.trace.propagation.B3Propagator;
 @ConditionalOnClass(B3Propagator.class)
 public class B3OtelSingleHeaderConfiguration {
 
+	/**
+	 * Default constructor.
+	 */
+	public B3OtelSingleHeaderConfiguration() {
+		// empty
+	}
+
+	/**
+	 * Returns the OpenTelemetry B3 single-header propagator bean.
+	 *
+	 * @return the OpenTelemetry B3 single-header propagator bean
+	 */
 	@Bean
 	B3Propagator b3Propagator() {
 		return B3Propagator.injectingSingleHeader();
