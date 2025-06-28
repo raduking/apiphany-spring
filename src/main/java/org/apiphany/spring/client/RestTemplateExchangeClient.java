@@ -60,13 +60,29 @@ import io.micrometer.core.instrument.MeterRegistry;
  */
 public class RestTemplateExchangeClient extends AbstractHttpExchangeClient implements ApplicationContextAware, BeanFinder {
 
+	/**
+	 * Class logger.
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(RestTemplateExchangeClient.class);
 
+	/**
+	 * The underlying REST template.
+	 */
 	private RestTemplate restTemplate;
 
+	/**
+	 * The underlying HTTP client.
+	 */
 	private CloseableHttpClient httpClient;
+
+	/**
+	 * The connection manager.
+	 */
 	private PoolingHttpClientConnectionManager connectionManager;
 
+	/**
+	 * The application context.
+	 */
 	private ApplicationContext ctx;
 
 	/**
@@ -82,7 +98,7 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	 * Initializes the client after the object was constructed. If you implement this class and use it as a non bean make
 	 * sure you use an initializer that calls all methods that are annotated with {@link PostConstruct}.
 	 *
-	 * @see Methods#invokeMethodsWithAnnotation(Object, Class)
+	 * @see Methods.IgnoreAccess#invokeWithAnnotation(Object, Class)
 	 */
 	@PostConstruct
 	private void initialize() {
