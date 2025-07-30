@@ -17,7 +17,7 @@
 
 	<groupId>io.github.raduking</groupId>
 	<artifactId>apiphany-spring</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>io.github.raduking</groupId>
 			<artifactId>apiphany-httpclient5</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.3</version>
 		</dependency>
 
 		<!-- Jakarta namespace -->
@@ -385,7 +385,7 @@
 					<plugin>
 						<groupId>org.owasp</groupId>
 						<artifactId>dependency-check-maven</artifactId>
-						<version>12.1.1</version>
+						<version>12.1.3</version>
 						<configuration>
 							<nvdApiKey>${env.MAVEN_NVD_API_KEY}</nvdApiKey>
 							<nvdApiDelay>16000</nvdApiDelay>
