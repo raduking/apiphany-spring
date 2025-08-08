@@ -101,7 +101,7 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	 * @see Methods.IgnoreAccess#invokeWithAnnotation(Object, Class)
 	 */
 	@PostConstruct
-	private void initialize() {
+	private void initialize() { // NOSONAR
 		ClientProperties clientProperties = getClientProperties();
 
 		this.httpClient = PoolingHttpClients.createClient(clientProperties, PoolingHttpClients.noCustomizer(),
