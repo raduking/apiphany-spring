@@ -191,12 +191,17 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 		HttpUriRequest httpRequest = ApacheHC5ExchangeClient.toHttpUriRequest(uri, method);
 		ApiResponse.Builder<T> apiResponseBuilder = ApiResponse.<T>builder().exchangeClient(this);
 		try {
+			@SuppressWarnings("resource")
 			ClassicHttpResponse httpResponse = httpClient.executeOpen(httpHost, httpRequest, null);
+
 			HttpStatus status = HttpStatus.from(httpResponse.getCode());
 			if (status.isError()) {
+				httpResponse.close();
 				throw new HttpException(status, "Failed to download content.");
 			}
 			HttpHeaders headers = SpringHttpRequests.toHttpHeaders(httpResponse.getHeaders());
+
+			@SuppressWarnings("resource")
 			InputStream inputStream = CloseableHttpResponseInputStream.of(httpResponse);
 			apiResponseBuilder
 					.body(JavaObjects.cast(inputStream))
