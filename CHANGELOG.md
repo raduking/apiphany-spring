@@ -2,6 +2,12 @@
 
 ---
 
+`1.0.9`
+
+Streamline versions with all Apiphany libraries.
+
+---
+
 `1.0.5`
 
 Streamline versions with all Apiphany libraries.

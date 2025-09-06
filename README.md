@@ -29,6 +29,6 @@ Maven: add this dependency to your `pom.xml`
 <dependency>
 	<groupId>io.github.raduking</groupId>
 	<artifactId>apiphany-spring</artifactId>
-	<version>1.0.5</version>
+	<version>1.0.9</version>
 </dependency>
 ```
