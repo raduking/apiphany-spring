@@ -18,8 +18,30 @@ public class Beans {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Beans.class);
 
-	public static final String MESSAGE_BEAN_NOT_FOUND = "Bean not found: {}";
-	public static final String MESSAGE_BEAN_NOT_FOUND_NEEDED_IN = MESSAGE_BEAN_NOT_FOUND + ", needed in: {}";
+	/**
+	 * Messages used for beans.
+	 *
+	 * @author Radu Sebastian LAZIN
+	 */
+	public static class Message {
+
+		/**
+		 * Message when a bean is not found.
+		 */
+		public static final String BEAN_NOT_FOUND = "Bean not found: {}";
+
+		/**
+		 * Message when a bean is not found and needed in another bean.
+		 */
+		public static final String BEAN_NOT_FOUND_NEEDED_IN = BEAN_NOT_FOUND + ", needed in: {}";
+
+		/**
+		 * Hide default constructor.
+		 */
+		private Message() {
+			throw Constructors.unsupportedOperationException();
+		}
+	}
 
 	/**
 	 * Private constructor.
@@ -55,7 +77,7 @@ public class Beans {
 	 * @return a bean
 	 */
 	public static <T> T getBean(final String beanName, final ApplicationContext ctx) {
-		return getBean(beanName, ctx, e -> LOGGER.error(MESSAGE_BEAN_NOT_FOUND, beanName));
+		return getBean(beanName, ctx, e -> LOGGER.error(Message.BEAN_NOT_FOUND, beanName));
 	}
 
 	/**
@@ -68,7 +90,7 @@ public class Beans {
 	 * @return a bean
 	 */
 	public static <T> T getBean(final String beanName, final Class<?> neededInClass, final ApplicationContext ctx) {
-		return getBean(beanName, ctx, e -> LOGGER.error(MESSAGE_BEAN_NOT_FOUND_NEEDED_IN, beanName, neededInClass));
+		return getBean(beanName, ctx, e -> LOGGER.error(Message.BEAN_NOT_FOUND_NEEDED_IN, beanName, neededInClass));
 	}
 
 	/**
@@ -84,7 +106,7 @@ public class Beans {
 		try {
 			return JavaObjects.cast(ctx.getBean(beanClass));
 		} catch (Exception e) {
-			LOGGER.trace(MESSAGE_BEAN_NOT_FOUND, beanClass);
+			LOGGER.trace(Message.BEAN_NOT_FOUND, beanClass);
 			onError.accept(e);
 			return null;
 		}
@@ -99,7 +121,7 @@ public class Beans {
 	 * @return a bean
 	 */
 	public static <T> T getBean(final Class<?> beanClass, final ApplicationContext ctx) {
-		return getBean(beanClass, ctx, e -> LOGGER.error(MESSAGE_BEAN_NOT_FOUND, beanClass));
+		return getBean(beanClass, ctx, e -> LOGGER.error(Message.BEAN_NOT_FOUND, beanClass));
 	}
 
 	/**
@@ -112,7 +134,7 @@ public class Beans {
 	 * @return a bean
 	 */
 	public static <T> T getBean(final Class<?> beanClass, final Class<?> neededInClass, final ApplicationContext ctx) {
-		return getBean(beanClass, ctx, e -> LOGGER.error(MESSAGE_BEAN_NOT_FOUND_NEEDED_IN, beanClass, neededInClass));
+		return getBean(beanClass, ctx, e -> LOGGER.error(Message.BEAN_NOT_FOUND_NEEDED_IN, beanClass, neededInClass));
 	}
 
 	/**

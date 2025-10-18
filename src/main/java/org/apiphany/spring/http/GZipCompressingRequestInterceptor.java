@@ -20,12 +20,22 @@ import org.springframework.util.ObjectUtils;
  */
 public class GZipCompressingRequestInterceptor implements ClientHttpRequestInterceptor {
 
+	/**
+	 * The logger.
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(GZipCompressingRequestInterceptor.class);
 
 	/**
 	 * Used in conjunction with compression configuration in clients.
 	 */
 	public static final String SKIP_COMPRESSION = "Skip-Compression";
+
+	/**
+	 * Default constructor.
+	 */
+	public GZipCompressingRequestInterceptor() {
+		// empty
+	}
 
 	/**
 	 * Compress a request body using GZIP and add HTTP headers.
