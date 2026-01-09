@@ -2,9 +2,8 @@ package org.apiphany.spring.collections;
 
 import java.util.Map;
 
-import org.apache.commons.collections4.MultiValuedMap;
-import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.morphix.lang.JavaObjects;
+import org.morphix.reflection.Constructors;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -15,16 +14,18 @@ import org.springframework.util.MultiValueMap;
  *
  * @author Radu Sebastian LAZIN
  */
-public abstract class ExtendedMaps {
+public class ExtendedMaps {
 
+	/**
+	 * Empty multi value map instance.
+	 */
 	private static final MultiValueMap<?, ?> EMPTY_MULTI_VALUE_MAP = new LinkedMultiValueMap<>(0);
-	private static final MultiValuedMap<?, ?> EMPTY_MULTI_VALUED_MAP = new ArrayListValuedHashMap<>(0);
 
 	/**
 	 * Private constructor.
 	 */
 	private ExtendedMaps() {
-		throw new UnsupportedOperationException("This class should not be instantiated");
+		throw Constructors.unsupportedOperationException();
 	}
 
 	/**
@@ -73,17 +74,4 @@ public abstract class ExtendedMaps {
 		multiValueMap.add(key, value);
 		return multiValueMap;
 	}
-
-	/**
-	 * Returns an empty multivalued map (Apache collection type).
-	 *
-	 * @param <K> key type
-	 * @param <V> value type
-	 *
-	 * @return an empty multi values map
-	 */
-	public static <K, V> MultiValuedMap<K, V> emptyMultiValuedMap() {
-		return JavaObjects.cast(EMPTY_MULTI_VALUED_MAP);
-	}
-
 }

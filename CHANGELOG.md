@@ -7,6 +7,7 @@
 - Streamline versions with all Apiphany libraries.
 - Upgraded parent to `3.5.8`.
 - Upgraded libraries to the same versions as Apiphany.
+- Upgraded `dependency-check-maven` to `12.2.0`.
 
 ---
 
