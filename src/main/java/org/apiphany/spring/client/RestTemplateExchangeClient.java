@@ -170,7 +170,7 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 			responseEntity = restTemplate.exchange(uri, springHttpMethod, httpEntity, request.getClassResponseType());
 		}
 		return ApiResponse.create(responseEntity.getBody())
-				.status(responseEntity.getStatusCode().value(), HttpStatus::from)
+				.status(responseEntity.getStatusCode().value(), HttpStatus::fromCode)
 				.headers(responseEntity.getHeaders())
 				.exchangeClient(this)
 				.build();
@@ -194,7 +194,7 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 			@SuppressWarnings("resource")
 			ClassicHttpResponse httpResponse = httpClient.executeOpen(httpHost, httpRequest, null);
 
-			HttpStatus status = HttpStatus.from(httpResponse.getCode());
+			HttpStatus status = HttpStatus.fromCode(httpResponse.getCode());
 			if (status.isError()) {
 				httpResponse.close();
 				throw new HttpException(status, "Failed to download content.");

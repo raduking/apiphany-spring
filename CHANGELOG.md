@@ -2,6 +2,14 @@
 
 ---
 
+`1.0.21`
+
+- Streamline versions with all Apiphany libraries.
+- Upgraded parent to `3.5.8`.
+- Upgraded libraries to the same versions as Apiphany.
+
+---
+
 `1.0.14`
 
 Streamline versions with all Apiphany libraries.

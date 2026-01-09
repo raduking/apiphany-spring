@@ -11,13 +11,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.3</version>
+		<version>3.5.8</version>
 		<relativePath />
 	</parent>
 
 	<groupId>io.github.raduking</groupId>
 	<artifactId>apiphany-spring</artifactId>
-	<version>1.0.14</version>
+	<version>1.0.21</version>
 	<packaging>jar</packaging>
 
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -52,14 +52,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<!-- Testing dependencies versions -->
-		<pitest.plugin.version>1.19.4</pitest.plugin.version>
-		<pitest.plugin.junit5.version>1.2.3</pitest.plugin.junit5.version>
-		<jacoco.plugin.version>0.8.13</jacoco.plugin.version>
-		<gpg.plugin.version>3.2.7</gpg.plugin.version>
+		<pitest.maven.plugin.version>1.22.0</pitest.maven.plugin.version>
+		<pitest.junit5.plugin.version>1.2.3</pitest.junit5.plugin.version>
+		<jacoco.maven.plugin.version>0.8.14</jacoco.maven.plugin.version>
+		<maven.project.info.reports.plugin.version>3.9.0</maven.project.info.reports.plugin.version>
 		
 		<!-- Publishing dependencies versions -->
-		<project.info.reports.plugin.version>3.9.0</project.info.reports.plugin.version>
-		<central.publishing.plugin.version>0.7.0</central.publishing.plugin.version>
+		<maven.gpg.plugin.version>3.2.8</maven.gpg.plugin.version>
+		<central.publishing.maven.plugin.version>0.9.0</central.publishing.maven.plugin.version>
 		
 		<apiphanySpringArgLine>
 			-Djson-builder.to-json.indent-output=true
@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>io.github.raduking</groupId>
 			<artifactId>apiphany-httpclient5</artifactId>
-			<version>1.0.14</version>
+			<version>1.0.21</version>
 		</dependency>
 
 		<!-- Jakarta namespace -->
@@ -256,7 +256,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.plugin.version}</version>
+				<version>${jacoco.maven.plugin.version}</version>
 				<executions>
 					<execution>
 						<id>pre-unit-test</id>
@@ -289,13 +289,13 @@
 			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
-				<version>${pitest.plugin.version}</version>
+				<version>${pitest.maven.plugin.version}</version>
 				<!-- Allows it to work with JUnit 5 -->
 				<dependencies>
 					<dependency>
 						<groupId>org.pitest</groupId>
 						<artifactId>pitest-junit5-plugin</artifactId>
-						<version>${pitest.plugin.junit5.version}</version>
+						<version>${pitest.junit5.plugin.version}</version>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -332,7 +332,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${gpg.plugin.version}</version>
+						<version>${maven.gpg.plugin.version}</version>
 						<executions>
 							<execution>
 							<id>sign-artifacts</id>
@@ -355,7 +355,7 @@
 					<plugin>
 						<groupId>org.sonatype.central</groupId>
 						<artifactId>central-publishing-maven-plugin</artifactId>
-						<version>${central.publishing.plugin.version}</version>
+						<version>${central.publishing.maven.plugin.version}</version>
 						<extensions>true</extensions>
 						<configuration>
 							<autoPublish>true</autoPublish>
