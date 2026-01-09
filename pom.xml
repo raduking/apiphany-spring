@@ -397,8 +397,8 @@
 							</suppressionFiles>
 							<hostedSuppressionsForceUpdate>true</hostedSuppressionsForceUpdate>
 							<ossIndexWarnOnlyOnRemoteErrors>true</ossIndexWarnOnlyOnRemoteErrors>
-							<!-- lower this to 7 when upgrading to Spring Boot 3.5.5 -->
-							<failBuildOnCVSS>9</failBuildOnCVSS>
+							<!-- lower this to 7 when upgrading to Spring Boot 3.5.9 -->
+							<failBuildOnCVSS>7</failBuildOnCVSS>
 						</configuration>
 						<executions>
 							<execution>
