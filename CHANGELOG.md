@@ -2,6 +2,13 @@
 
 ---
 
+`1.0.23`
+
+- Streamline versions with all Apiphany libraries.
+- Updated `RestTemplateExchangeClient` to add common headers.
+
+---
+
 `1.0.21`
 
 - Streamline versions with all Apiphany libraries.

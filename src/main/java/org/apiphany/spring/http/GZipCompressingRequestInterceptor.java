@@ -3,7 +3,7 @@ package org.apiphany.spring.http;
 import java.io.IOException;
 
 import org.apiphany.http.ContentEncoding;
-import org.apiphany.lang.gzip.GZip;
+import org.apiphany.io.gzip.GZip;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

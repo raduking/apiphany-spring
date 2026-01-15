@@ -152,22 +152,22 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	 * @see ExchangeClient#exchange(ApiRequest)
 	 */
 	@Override
-	public <T, U> ApiResponse<U> exchange(final ApiRequest<T> request) {
-		URI uri = getUriComponentsBuilder(request.getUrl(), request.getParams()).build().toUri();
-		HttpEntity<?> httpEntity = buildHttpEntity(request);
-		HttpMethod httpMethod = request.getMethod();
-		if (request.isStream()) {
+	public <T, U> ApiResponse<U> exchange(final ApiRequest<T> apiRequest) {
+		URI uri = getUriComponentsBuilder(apiRequest.getUrl(), apiRequest.getParams()).build().toUri();
+		HttpEntity<?> httpEntity = buildHttpEntity(apiRequest);
+		HttpMethod httpMethod = apiRequest.getMethod();
+		if (apiRequest.isStream()) {
 			return download(uri, httpMethod, httpEntity);
 		}
 		var springHttpMethod = SpringHttpRequests.getHttpMethod(httpMethod.value());
 
 		ResponseEntity<U> responseEntity = null;
-		if (request.hasGenericType()) {
-			Type genericType = request.getGenericResponseType().getType();
+		if (apiRequest.hasGenericType()) {
+			Type genericType = apiRequest.getGenericResponseType().getType();
 			ParameterizedTypeReference<U> parameterizedResponseType = ParameterizedTypeReference.forType(genericType);
 			responseEntity = restTemplate.exchange(uri, springHttpMethod, httpEntity, parameterizedResponseType);
 		} else {
-			responseEntity = restTemplate.exchange(uri, springHttpMethod, httpEntity, request.getClassResponseType());
+			responseEntity = restTemplate.exchange(uri, springHttpMethod, httpEntity, apiRequest.getClassResponseType());
 		}
 		return ApiResponse.create(responseEntity.getBody())
 				.status(responseEntity.getStatusCode().value(), HttpStatus::fromCode)
@@ -188,7 +188,10 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	 */
 	public <T, U> ApiResponse<T> download(final URI uri, final HttpMethod method, final HttpEntity<U> requestEntity) {
 		HttpHost httpHost = HttpHost.create(uri);
+
 		HttpUriRequest httpRequest = ApacheHC5ExchangeClient.toHttpUriRequest(uri, method);
+		ApacheHC5ExchangeClient.addHeaders(httpRequest, requestEntity.getHeaders());
+
 		ApiResponse.Builder<T> apiResponseBuilder = ApiResponse.<T>builder().exchangeClient(this);
 		try {
 			@SuppressWarnings("resource")
@@ -234,16 +237,16 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	 *
 	 * @param <T> request entity type
 	 *
-	 * @param request the request object
+	 * @param apiRequest the request object
 	 * @return the request entity
 	 */
-	protected <T> HttpEntity<T> buildHttpEntity(final ApiRequest<T> request) {
+	protected <T> HttpEntity<T> buildHttpEntity(final ApiRequest<T> apiRequest) {
 		HttpHeaders headers = new HttpHeaders();
-		Map<String, List<String>> existingHeaders = request.getHeaders();
+		Map<String, List<String>> existingHeaders = apiRequest.getHeaders();
 		if (Maps.isNotEmpty(existingHeaders)) {
 			existingHeaders.forEach(headers::addAll);
 		}
-		return new HttpEntity<>(request.getBody(), headers);
+		return new HttpEntity<>(apiRequest.getBody(), headers);
 	}
 
 	/**
