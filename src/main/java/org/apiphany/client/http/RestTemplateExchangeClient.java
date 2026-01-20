@@ -1,4 +1,4 @@
-package org.apiphany.spring.client;
+package org.apiphany.client.http;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,9 +19,6 @@ import org.apiphany.ApiRequest;
 import org.apiphany.ApiResponse;
 import org.apiphany.client.ClientProperties;
 import org.apiphany.client.ExchangeClient;
-import org.apiphany.client.http.AbstractHttpExchangeClient;
-import org.apiphany.client.http.ApacheHC5ExchangeClient;
-import org.apiphany.client.http.PoolingHttpClients;
 import org.apiphany.http.CloseableHttpResponseInputStream;
 import org.apiphany.http.HttpException;
 import org.apiphany.http.HttpMethod;
