@@ -221,8 +221,8 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	 * @param requestParams request parameters
 	 * @return a new {@link UriComponentsBuilder}
 	 */
-	protected static UriComponentsBuilder getUriComponentsBuilder(final String url, final Map<String, String> requestParams) {
-		Map<String, String> queryParams = Nullables.apply(requestParams, HashMap::new, HashMap::new);
+	protected static UriComponentsBuilder getUriComponentsBuilder(final String url, final Map<String, List<String>> requestParams) {
+		Map<String, List<String>> queryParams = Nullables.apply(requestParams, HashMap::new, HashMap::new);
 		return UriComponentsBuilder.fromUriString(url)
 				.queryParams(ExtendedMaps.multiValueMap(queryParams));
 	}

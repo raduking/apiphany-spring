@@ -1,5 +1,6 @@
 package org.apiphany.spring.collections;
 
+import java.util.List;
 import java.util.Map;
 
 import org.morphix.lang.JavaObjects;
@@ -48,13 +49,13 @@ public class ExtendedMaps {
 	 * @param map entry map
 	 * @return a new multi value map
 	 */
-	public static <K, V> MultiValueMap<K, V> multiValueMap(final Map<K, V> map) {
+	public static <K, V> MultiValueMap<K, V> multiValueMap(final Map<K, List<V>> map) {
 		if (map == null) {
 			return emptyMultiValueMap();
 		}
 		MultiValueMap<K, V> multiValueMap = new LinkedMultiValueMap<>();
-		for (Map.Entry<K, V> entry : map.entrySet()) {
-			multiValueMap.add(entry.getKey(), entry.getValue());
+		for (Map.Entry<K, List<V>> entry : map.entrySet()) {
+			multiValueMap.addAll(entry.getKey(), entry.getValue());
 		}
 		return multiValueMap;
 	}
