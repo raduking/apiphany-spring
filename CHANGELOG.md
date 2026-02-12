@@ -1,5 +1,12 @@
 ## Release Notes
 
+
+`1.1.5`
+
+- Streamline versions with all Apiphany libraries.
+
+---
+
 `1.0.25`
 
 - Streamline versions with all Apiphany libraries.

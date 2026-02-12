@@ -46,8 +46,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-
 import io.micrometer.core.instrument.MeterRegistry;
 
 /**
@@ -83,6 +81,13 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	private ApplicationContext ctx;
 
 	/**
+	 * Default constructor, see also {@link #initialize()}.
+	 */
+	public RestTemplateExchangeClient() {
+		this(ClientProperties.defaults());
+	}
+
+	/**
 	 * Constructor, see also {@link #initialize()}.
 	 *
 	 * @param clientProperties client properties
@@ -108,8 +113,8 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 		if (clientProperties.getCompression().isGzip()) {
 			restTemplate.getInterceptors().add(new GZipCompressingRequestInterceptor());
 		}
-		RestTemplates.getObjectMapper(restTemplate)
-				.ifPresent(mapper -> mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true));
+//		RestTemplates.getObjectMapper(restTemplate)
+//				.ifPresent(mapper -> mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true));
 	}
 
 	/**
