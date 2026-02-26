@@ -106,8 +106,8 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	private void initialize() { // NOSONAR
 		ClientProperties clientProperties = getClientProperties();
 
-		this.httpClient = PoolingHttpClients.createClient(clientProperties, PoolingHttpClients.noCustomizer(),
-				this::customize, PoolingHttpClients.noCustomizer());
+		this.httpClient = ApacheHC5PoolingHttpClients.createClient(clientProperties, ApacheHC5PoolingHttpClients.noCustomizer(),
+				this::customize, ApacheHC5PoolingHttpClients.noCustomizer());
 		this.restTemplate = RestTemplates.create(httpClient, getApplicationContext());
 
 		if (clientProperties.getCompression().isGzip()) {
@@ -191,8 +191,8 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	public <T, U> ApiResponse<T> download(final URI uri, final HttpMethod method, final HttpEntity<U> requestEntity) {
 		HttpHost httpHost = HttpHost.create(uri);
 
-		HttpUriRequest httpRequest = ApacheHC5ExchangeClient.toHttpUriRequest(uri, method);
-		ApacheHC5ExchangeClient.addHeaders(httpRequest, requestEntity.getHeaders());
+		HttpUriRequest httpRequest = ApacheHC5HttpExchangeClient.toHttpUriRequest(uri, method);
+		ApacheHC5HttpExchangeClient.addHeaders(httpRequest, requestEntity.getHeaders());
 
 		ApiResponse.Builder<T> apiResponseBuilder = ApiResponse.<T>builder().exchangeClient(this);
 		try {
