@@ -50,7 +50,7 @@ public class ExtendedMaps {
 	 * @return a new multi value map
 	 */
 	public static <K, V> MultiValueMap<K, V> multiValueMap(final Map<K, List<V>> map) {
-		if (map == null) {
+		if (null == map || map.isEmpty()) {
 			return emptyMultiValueMap();
 		}
 		MultiValueMap<K, V> multiValueMap = new LinkedMultiValueMap<>();
