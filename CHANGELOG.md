@@ -1,5 +1,10 @@
 ## Release Notes
 
+`1.1.6`
+
+- Streamline versions with all Apiphany libraries.
+
+---
 
 `1.1.5`
 
