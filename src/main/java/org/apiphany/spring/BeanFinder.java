@@ -55,5 +55,4 @@ public interface BeanFinder extends ApplicationContextCapable {
 	default <T> T getBean(final Class<T> beanClass, final Consumer<Exception> onError) {
 		return Beans.getBean(beanClass, getApplicationContext(), onError);
 	}
-
 }

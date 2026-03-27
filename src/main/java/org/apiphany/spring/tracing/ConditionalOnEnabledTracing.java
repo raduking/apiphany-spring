@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Conditional;
 /**
  * {@link Conditional @Conditional} that checks whether tracing is enabled.
  * <p>
- * It matches if {@code management.tracing.enabled} property is {@code true} or if it
- * is not present in application properties.
+ * It matches if {@code management.tracing.enabled} property is {@code true} or if it is not present in application
+ * properties.
  *
  * @author Radu Sebastian LAZIN
  */

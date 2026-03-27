@@ -63,6 +63,7 @@ public class Beans {
 		try {
 			return JavaObjects.cast(ctx.getBean(beanName));
 		} catch (Exception e) {
+			LOGGER.trace(Message.BEAN_NOT_FOUND, beanName);
 			onError.accept(e);
 			return null;
 		}
@@ -150,5 +151,4 @@ public class Beans {
 	public static Consumer<Exception> nullOnError() {
 		return Consumers.consumeNothing();
 	}
-
 }

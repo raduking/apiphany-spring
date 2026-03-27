@@ -14,7 +14,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.util.ObjectUtils;
 
 /**
- * GZIP compression interceptor.
+ * GZIP compression request interceptor.
  *
  * @author Radu Sebastian LAZIN
  */
@@ -77,9 +77,7 @@ public class GZipCompressingRequestInterceptor implements ClientHttpRequestInter
 	private static byte[] compress(final byte[] body, final HttpHeaders httpHeaders) throws IOException {
 		byte[] bytes = GZip.compress(body);
 		httpHeaders.add(HttpHeaders.CONTENT_ENCODING, ContentEncoding.GZIP.value());
-		httpHeaders.add(HttpHeaders.ACCEPT_ENCODING, ContentEncoding.GZIP.value());
 		httpHeaders.set(HttpHeaders.CONTENT_LENGTH, Integer.toString(bytes.length));
 		return bytes;
 	}
-
 }

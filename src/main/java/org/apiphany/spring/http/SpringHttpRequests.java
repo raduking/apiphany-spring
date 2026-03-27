@@ -3,7 +3,6 @@ package org.apiphany.spring.http;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -11,6 +10,7 @@ import org.apache.hc.core5.http.Header;
 import org.morphix.reflection.Constructors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -28,11 +28,15 @@ public class SpringHttpRequests {
 	 *
 	 * @return the current HTTP servlet request
 	 */
-	public static Optional<HttpServletRequest> getCurrentHttpRequest() {
-		return Optional.ofNullable(RequestContextHolder.getRequestAttributes())
-				.filter(o -> ServletRequestAttributes.class.isAssignableFrom(o.getClass()))
-				.map(ServletRequestAttributes.class::cast)
-				.map(ServletRequestAttributes::getRequest);
+	public static HttpServletRequest getCurrentHttpRequest() {
+		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+		if (null == requestAttributes) {
+			return null;
+		}
+		if (requestAttributes instanceof ServletRequestAttributes servletRequestAttributes) {
+			return servletRequestAttributes.getRequest();
+		}
+		return null;
 	}
 
 	/**

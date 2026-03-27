@@ -77,5 +77,4 @@ public abstract class RestTemplates {
         }
         return Optional.ofNullable(objectMapper);
 	}
-
 }

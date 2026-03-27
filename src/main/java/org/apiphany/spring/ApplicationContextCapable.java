@@ -15,5 +15,4 @@ public interface ApplicationContextCapable {
 	 * @return the application context
 	 */
 	ApplicationContext getApplicationContext();
-
 }
