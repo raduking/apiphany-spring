@@ -45,15 +45,15 @@ public class SpringHttpRequests {
 	 * @param requestParameters HTTP request parameters
 	 * @return encoded request parameters
 	 */
-	public static Map<String, String> encodeRequestParameters(final Map<String, String> requestParameters) {
-		Map<String, String> params = HashMap.newHashMap(requestParameters.size());
+	public static Map<String, List<String>> encodeRequestParameters(final Map<String, List<String>> requestParameters) {
 		var uriComponentsBuilder = UriComponentsBuilder.newInstance();
 		requestParameters.forEach(uriComponentsBuilder::queryParam);
 		Map<String, List<String>> multiParams = uriComponentsBuilder
 				.encode()
 				.build()
 				.getQueryParams();
-		requestParameters.forEach((key, value) -> params.put(key, multiParams.get(key).getFirst()));
+		Map<String, List<String>> params = HashMap.newHashMap(requestParameters.size());
+		requestParameters.forEach((key, value) -> params.put(key, multiParams.get(key)));
 		return params;
 	}
 

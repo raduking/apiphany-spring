@@ -16,6 +16,9 @@ import org.springframework.context.ApplicationContext;
  */
 public class Beans {
 
+	/**
+	 * Class logger.
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(Beans.class);
 
 	/**
