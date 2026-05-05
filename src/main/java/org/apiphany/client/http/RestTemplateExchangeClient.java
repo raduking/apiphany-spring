@@ -23,7 +23,6 @@ import org.apiphany.http.CloseableHttpResponseInputStream;
 import org.apiphany.http.HttpException;
 import org.apiphany.http.HttpMethod;
 import org.apiphany.http.HttpStatus;
-import org.apiphany.lang.collections.Maps;
 import org.apiphany.meters.ConnectionManagerMetricsBinder;
 import org.apiphany.spring.BeanFinder;
 import org.apiphany.spring.RestTemplates;
@@ -32,6 +31,7 @@ import org.apiphany.spring.http.GZipCompressingRequestInterceptor;
 import org.apiphany.spring.http.SpringHttpRequests;
 import org.morphix.lang.JavaObjects;
 import org.morphix.lang.Nullables;
+import org.morphix.lang.collections.Maps;
 import org.morphix.reflection.Methods;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,8 +113,8 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 		if (clientProperties.getCompression().isGzip()) {
 			restTemplate.getInterceptors().add(new GZipCompressingRequestInterceptor());
 		}
-//		RestTemplates.getObjectMapper(restTemplate)
-//				.ifPresent(mapper -> mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true));
+		// RestTemplates.getObjectMapper(restTemplate)
+		// .ifPresent(mapper -> mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true));
 	}
 
 	/**
@@ -233,9 +233,9 @@ public class RestTemplateExchangeClient extends AbstractHttpExchangeClient imple
 	}
 
 	/**
-	 * Builds the HTTP request entity from the API request object. This method also adds: {@link HttpHeaders#CONTENT_TYPE} as
-	 * {@link MediaType#APPLICATION_JSON} and {@link HttpHeaders#ACCEPT} with {@link MediaType#APPLICATION_JSON} if none are
-	 * present in the request.
+	 * Builds the HTTP request entity from the API request object. This method also adds: {@link HttpHeaders#CONTENT_TYPE}
+	 * as {@link MediaType#APPLICATION_JSON} and {@link HttpHeaders#ACCEPT} with {@link MediaType#APPLICATION_JSON} if none
+	 * are present in the request.
 	 *
 	 * @param <T> request entity type
 	 *

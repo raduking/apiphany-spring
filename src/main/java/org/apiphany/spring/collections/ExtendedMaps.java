@@ -11,7 +11,7 @@ import org.springframework.util.MultiValueMap;
 /**
  * Utility methods for non standard maps. This class is only here because Spring adds some new multi-value maps.
  * <p>
- * Use {@link org.apiphany.lang.collections.Maps} for any other purposes.
+ * Use {@link org.morphix.lang.collections.Maps} for any other purposes.
  *
  * @author Radu Sebastian LAZIN
  */
